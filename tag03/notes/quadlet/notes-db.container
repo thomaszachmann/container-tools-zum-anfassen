@@ -1,0 +1,19 @@
+# ~/.config/containers/systemd/notes-db.container – Stand Ende Tag 3
+[Unit]
+Description=Postgres für notes
+
+[Container]
+ContainerName=notes-db
+Image=docker.io/library/postgres:18.6-alpine
+Pod=notes.pod
+Volume=notes-pgdata.volume:/var/lib/postgresql
+Environment=POSTGRES_USER=notes POSTGRES_DB=notes
+Environment=POSTGRES_PASSWORD=lab-db-pw-123
+HealthCmd=pg_isready -h 127.0.0.1 -U notes -d notes
+HealthInterval=5s
+Notify=healthy
+AutoUpdate=registry
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=300

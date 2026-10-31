@@ -1,0 +1,8 @@
+# notes-api/Containerfile.besser – Stand Ende Tag 11 (ein Layer statt drei)
+FROM docker.io/library/golang:1.27-alpine
+WORKDIR /src
+COPY . .
+RUN go build -o /usr/local/bin/notes-api . \
+ && rm -rf /root/.cache/go-build /go/pkg/mod
+EXPOSE 8080
+ENTRYPOINT ["notes-api"]

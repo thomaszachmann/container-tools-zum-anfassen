@@ -1,0 +1,13 @@
+# ~/.config/containers/systemd/r15-api.container – Runde 4 (kaputt)
+[Unit]
+Description=notes-api für den Lasttest (Runde 4)
+
+[Container]
+ContainerName=r15-api
+Image=localhost/notes-api:0.1.0
+PublishPort=127.0.0.1:8084:8080
+Enviroment=NOTES_API_KEY=lab-api-key-123
+Notify=healthy
+
+[Service]
+Restart=on-failure

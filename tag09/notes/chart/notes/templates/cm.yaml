@@ -1,0 +1,7 @@
+# chart/notes/templates/cm.yaml – Stand Ende Tag 9
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notes
+data:
+  version: "{{ .Chart.AppVersion }}"

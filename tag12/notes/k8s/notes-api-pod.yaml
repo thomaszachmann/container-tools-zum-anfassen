@@ -1,0 +1,18 @@
+# k8s/notes-api-pod.yaml – Stand Ende Tag 10: notes-api aus der eigenen Registry
+apiVersion: v1
+kind: Pod
+metadata:
+  name: notes-api
+  labels:
+    app: notes-api
+spec:
+  imagePullSecrets:
+    - name: regcred
+  containers:
+    - name: notes-api
+      image: registry.ct.lab:5000/notes/notes-api:0.1.0
+      ports:
+        - containerPort: 8080
+      env:
+        - name: NOTES_API_KEY
+          value: lab-api-key-123

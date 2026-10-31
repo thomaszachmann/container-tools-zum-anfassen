@@ -1,0 +1,7 @@
+{
+  "default": [{"type": "reject"}],
+  "transports": {
+    "docker": {"registry.ct.lab:5000": [{"type": "insecureAcceptAnything"}]},
+    "dir": {"": [{"type": "insecureAcceptAnything"}]}
+  }
+}

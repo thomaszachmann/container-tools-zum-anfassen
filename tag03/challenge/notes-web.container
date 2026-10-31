@@ -1,0 +1,17 @@
+# challenge/notes-web.container – Stand Ende Tag 3 (Challenge: Memory=128m)
+[Unit]
+Description=notes-web
+Wants=notes-api.container
+After=notes-api.container
+
+[Container]
+ContainerName=notes-web
+Image=localhost/notes-web:0.1.0
+Pod=notes.pod
+Environment=NOTES_API_URL=http://127.0.0.1:8080
+Environment=NOTES_API_KEY=lab-api-key-123
+AutoUpdate=local
+Memory=128m
+
+[Service]
+Restart=on-failure

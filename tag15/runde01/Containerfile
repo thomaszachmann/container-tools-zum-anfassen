@@ -1,0 +1,3 @@
+# runde01/Containerfile – Runde 1 (kaputt): Doku-Seite für notes
+FROM nginx:stable-alpine
+COPY index.html /usr/share/nginx/html/index.html

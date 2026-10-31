@@ -1,0 +1,4 @@
+# .trivyignore – Runde 9: bewusst akzeptierte Befunde, je mit Grund und Ablauf
+# golang.org/x/text v0.29.0 in notes-api: Update eingeplant (Ticket LAB-13)
+CVE-2026-56851 exp:2026-09-30
+CVE-2026-56852 exp:2026-09-30

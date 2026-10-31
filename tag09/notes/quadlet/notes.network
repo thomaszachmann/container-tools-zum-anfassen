@@ -1,0 +1,6 @@
+# ~/.config/containers/systemd/notes.network – Stand Ende Tag 3
+[Unit]
+Description=Netz für den Pod notes
+
+[Network]
+NetworkName=notes

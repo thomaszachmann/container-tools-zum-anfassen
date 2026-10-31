@@ -1,0 +1,11 @@
+# ~/.config/containers/systemd/r15-web.container – Runde 3 (kaputt)
+[Unit]
+Description=notes-Doku auf Port 80 (Runde 3)
+
+[Container]
+ContainerName=r15-web
+Image=docker.io/library/nginx:1.30.6-alpine
+PublishPort=127.0.0.1:80:80
+
+[Service]
+Restart=on-failure

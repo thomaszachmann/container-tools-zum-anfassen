@@ -1,0 +1,11 @@
+# ~/.config/containers/systemd/web.container – nur Tag 3, Drill 1–2
+[Unit]
+Description=nginx als Quadlet (Tag 3)
+
+[Container]
+ContainerName=web
+Image=docker.io/library/nginx:1.30.6-alpine
+PublishPort=127.0.0.1:8080:80
+
+[Install]
+WantedBy=default.target

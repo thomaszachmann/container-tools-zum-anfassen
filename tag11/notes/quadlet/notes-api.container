@@ -1,0 +1,17 @@
+# ~/.config/containers/systemd/notes-api.container – Stand Ende Tag 3
+[Unit]
+Description=notes-api
+Requires=notes-migrate.container
+After=notes-migrate.container
+
+[Container]
+ContainerName=notes-api
+Image=localhost/notes-api:0.1.0
+Pod=notes.pod
+Environment=NOTES_API_KEY=lab-api-key-123
+Environment=NOTES_DB_URL=postgres://notes:lab-db-pw-123@127.0.0.1:5432/notes
+Notify=healthy
+AutoUpdate=local
+
+[Service]
+Restart=on-failure

@@ -1,0 +1,14 @@
+# kind/kind-ct-lab.yaml – Stand Ende Tag 10: ein Node, CA für die eigene Registry
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: ct-lab
+nodes:
+  - role: control-plane
+    extraMounts:
+      - hostPath: /home/ubuntu/ct-lab/tag10/certs.d
+        containerPath: /etc/containerd/certs.d
+        readOnly: true
+containerdConfigPatches:
+  - |-
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = "/etc/containerd/certs.d"

@@ -1,0 +1,19 @@
+# ~/.config/containers/systemd/anhb-api.container – Anhang B, Lösung Übung 8
+# Vorlage: DIGEST = Inhalt von digest.txt (die Lösung schreibt die Datei per Heredoc)
+[Unit]
+Description=notes-api aus der Pipeline, nur signiert (Anhang B)
+
+[Container]
+ContainerName=anhb-api
+Image=registry.ct.lab:5000/anhb/notes-api@DIGEST
+PublishPort=127.0.0.1:8091:8080
+Environment=NOTES_API_KEY=lab-api-key-123
+Notify=healthy
+
+[Service]
+ExecStartPre=/usr/local/bin/cosign verify --key %h/ct-lab/keys/cosign.pub \
+  --insecure-ignore-tlog=true registry.ct.lab:5000/anhb/notes-api@DIGEST
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,12 @@
+# .hadolint.yaml – Stand Ende Tag 12: gilt, wenn hadolint im Projektordner läuft
+failure-threshold: warning
+override:
+  error:
+    - DL3002   # letzter USER ist root
+    - DL3025   # CMD/ENTRYPOINT in Shell-Form
+ignored:
+  - DL3059     # mehrere RUN hintereinander: die Layer misst dive (Tag 11)
+trustedRegistries:
+  - docker.io
+  - gcr.io
+  - ghcr.io

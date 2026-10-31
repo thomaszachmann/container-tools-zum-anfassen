@@ -1,0 +1,12 @@
+# ~/.config/containers/systemd/notes.pod – Stand Ende Tag 3
+[Unit]
+Description=Pod notes: db, migrate, api, web
+
+[Pod]
+PodName=notes
+Network=notes.network
+PublishPort=127.0.0.1:8080:8080
+PublishPort=127.0.0.1:3000:3000
+
+[Install]
+WantedBy=default.target

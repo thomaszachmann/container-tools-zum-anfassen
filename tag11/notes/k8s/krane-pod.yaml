@@ -1,0 +1,34 @@
+# k8s/krane-pod.yaml – Stand Ende Tag 10: krane im Cluster mit Pull-Secret als Datei
+apiVersion: v1
+kind: Pod
+metadata:
+  name: krane
+spec:
+  imagePullSecrets:
+    - name: regcred
+  containers:
+    - name: krane
+      image: registry.ct.lab:5000/library/nginx:1.30.6-alpine
+      command: ["sleep", "3600"]
+      env:
+        - name: DOCKER_CONFIG
+          value: /docker
+        - name: SSL_CERT_FILE
+          value: /certs/ca.crt
+      volumeMounts:
+        - name: regcred
+          mountPath: /docker
+          readOnly: true
+        - name: lab-ca
+          mountPath: /certs
+          readOnly: true
+  volumes:
+    - name: regcred
+      secret:
+        secretName: regcred
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+    - name: lab-ca
+      configMap:
+        name: lab-ca

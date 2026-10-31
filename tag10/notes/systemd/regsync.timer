@@ -1,0 +1,11 @@
+# systemd/regsync.timer – Stand Ende Tag 9 (Skizze)
+[Unit]
+Description=regsync alle 6 Stunden
+
+[Timer]
+OnCalendar=00/6:00
+RandomizedDelaySec=15m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

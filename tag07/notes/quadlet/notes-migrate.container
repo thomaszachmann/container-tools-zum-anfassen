@@ -1,0 +1,16 @@
+# ~/.config/containers/systemd/notes-migrate.container – Stand Ende Tag 3
+[Unit]
+Description=Schema für notes anlegen (einmalig pro Start)
+Requires=notes-db.container
+After=notes-db.container
+
+[Container]
+ContainerName=notes-migrate
+Image=localhost/notes-api:0.1.0
+Pod=notes.pod
+Exec=migrate
+Environment=NOTES_DB_URL=postgres://notes:lab-db-pw-123@127.0.0.1:5432/notes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes

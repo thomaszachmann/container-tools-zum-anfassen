@@ -1,0 +1,6 @@
+# kind/hosts.toml – Stand Ende Tag 10: containerd-Hostkonfiguration für die Registry
+server = "https://registry.ct.lab:5000"
+
+[host."https://registry.ct.lab:5000"]
+  capabilities = ["pull", "resolve"]
+  ca = "/etc/containerd/certs.d/registry.ct.lab:5000/ca.crt"

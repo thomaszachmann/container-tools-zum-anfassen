@@ -1,0 +1,8 @@
+# systemd/regsync.service – Stand Ende Tag 9 (Skizze)
+[Unit]
+Description=regsync: Docker Hub in die eigene Registry spiegeln
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/ct-lab/tag09/regsync.env
+ExecStart=/usr/local/bin/regsync once -c %h/ct-lab/tag09/regsync.yml

@@ -1,0 +1,8 @@
+# compose.nerdctl.yaml – Stand Ende Tag 6
+# Ergänzung zu compose.yaml für nerdctl compose (containerd) auf Ubuntu 26.04:
+# Das AppArmor-Profil nerdctl-default verbietet gosu (Postgres-Entrypoint) ein Signal
+# an die eigenen Threads, postgres startet nie. Nur im Labor: Profil für db aus.
+services:
+  db:
+    security_opt:
+      - apparmor=unconfined

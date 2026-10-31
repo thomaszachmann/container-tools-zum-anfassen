@@ -1,0 +1,12 @@
+# notes-api/.ko.yaml – Stand Ende Tag 5
+defaultBaseImage: gcr.io/distroless/static-debian13:nonroot
+builds:
+  - id: notes-api
+    main: .
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X main.version={{.Env.VERSION}}

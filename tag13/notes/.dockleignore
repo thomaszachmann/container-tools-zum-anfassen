@@ -1,0 +1,5 @@
+# .dockleignore – Stand Ende Tag 12: bewusst akzeptierte dockle-Checks
+# Docker Content Trust gibt es bei Podman nicht; signiert wird an Tag 14 mit cosign
+CIS-DI-0005
+# python:3.15-slim räumt mit "apt-get dist-clean" auf, das kennt dockle 0.4.15 nicht
+DKL-DI-0005

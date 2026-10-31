@@ -1,0 +1,13 @@
+# challenge/notes-api/Containerfile – Challenge Tag 15 (kaputt)
+FROM docker.io/library/golang:1.27-alpine AS build
+WORKDIR /src
+COPY . .
+RUN CGO_ENABLED=0 go build -o /out/notes-api .
+
+FROM docker.io/library/alpine:3.24
+COPY --from=build /out/notes-api /usr/local/bin/notes-api
+RUN chmod 755 /usr/local/bin/notes-api
+RUN apk add curl
+EXPOSE 8080
+HEALTHCHECK CMD curl -fsS http://127.0.0.1:8080/healthz || exit 1
+ENTRYPOINT ["notes-api"]

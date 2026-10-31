@@ -1,0 +1,5 @@
+# chart/notes/Chart.yaml – Stand Ende Tag 9
+apiVersion: v2
+name: notes
+version: 0.1.0
+appVersion: "0.1.0"

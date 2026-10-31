@@ -1,0 +1,27 @@
+# regsync.yml – Stand Ende Tag 9: Docker Hub in die eigene Registry spiegeln
+version: 1
+creds:
+  - registry: '{{ env "REG" }}'
+    user: '{{ env "REG_USER" }}'
+    pass: '{{ env "REG_PASS" }}'
+defaults:
+  parallel: 1
+  interval: 6h
+  ratelimit:
+    min: 20
+    retry: 15m
+sync:
+  - source: docker.io/library/nginx
+    target: '{{ env "REG" }}/mirror/nginx'
+    type: repository
+    tags:
+      allow:
+        - '1\.30\.6-alpine'
+        - 'stable-alpine'
+  - source: docker.io/library/postgres
+    target: '{{ env "REG" }}/mirror/postgres'
+    type: repository
+    platform: linux/arm64
+    tags:
+      allow:
+        - '18\.6-alpine'

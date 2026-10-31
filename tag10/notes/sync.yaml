@@ -1,0 +1,5 @@
+# sync.yaml – Stand Ende Tag 8: Quellen für skopeo sync --src yaml
+registry.ct.lab:5000:
+  images-by-tag-regex:
+    notes/notes-api: ^0\.1\.
+    notes/notes-worker: ^0\.

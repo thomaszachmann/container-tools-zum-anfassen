@@ -1,0 +1,6 @@
+# ~/.config/containers/systemd/notes-pgdata.volume – Stand Ende Tag 3
+[Unit]
+Description=Postgres-Daten für notes
+
+[Volume]
+VolumeName=notes-pgdata

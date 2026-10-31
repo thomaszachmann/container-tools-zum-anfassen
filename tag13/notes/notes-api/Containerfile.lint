@@ -1,0 +1,10 @@
+# notes-api/Containerfile.lint – Stand Ende Tag 12 (absichtlich fehlerhaft)
+FROM golang:latest
+RUN apt-get update && apt-get install -y curl
+ADD . /src
+RUN cd /src && go build -o /usr/local/bin/notes-api . \
+ && chmod 755 $(which notes-api)
+FROM quay.io/example/runtime:1.0
+COPY --from=0 /usr/local/bin/notes-api /notes-api
+USER root
+CMD /notes-api

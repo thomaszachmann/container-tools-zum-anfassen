@@ -1,0 +1,3 @@
+# ~/.config/lazydocker/config.yml – Stand Ende Tag 4
+commandTemplates:
+  dockerCompose: podman compose

@@ -1,0 +1,23 @@
+# notes-api/Containerfile – Anhang B, Lösung Übung 1
+FROM docker.io/library/golang:1.27-alpine AS build
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+ARG VERSION=dev
+RUN CGO_ENABLED=0 go build -trimpath \
+      -ldflags="-s -w -X main.version=${VERSION}" -o /out/notes-api .
+
+FROM scratch
+ARG VERSION=dev
+LABEL org.opencontainers.image.title="notes-api" \
+      org.opencontainers.image.source="https://example.com/ct-lab/notes" \
+      org.opencontainers.image.version="${VERSION}"
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /out/notes-api /notes-api
+EXPOSE 8080
+USER 65532:65532
+HEALTHCHECK --interval=10s --timeout=2s --start-period=5s \
+  CMD ["/notes-api", "healthcheck"]
+STOPSIGNAL SIGTERM
+ENTRYPOINT ["/notes-api"]

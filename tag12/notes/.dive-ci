@@ -1,0 +1,5 @@
+# .dive-ci – Stand Ende Tag 11: Grenzwerte für dive --ci
+rules:
+  lowestEfficiency: 0.98           # mind. 98 % effizient
+  highestWastedBytes: 10MB         # höchstens 10 MB doppelt/gelöscht
+  highestUserWastedPercent: 0.05   # höchstens 5 % Verschwendung in eigenen Layern
