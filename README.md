@@ -25,7 +25,8 @@ Der Code begleitet das Buch; Erklärungen und Übungen stehen im Buch.
 - `tag12/` – Tag 12
 - `tag13/` – Tag 13
 - `tag14/` – Tag 14
-- `tag15/` – Tag 15
+- `tag15/` – Tag 15 (Docker-Werkzeuge: Compose, Bake, Scaffdog-Vorlage)
+- `tag16/` – Tag 16 (Wettkampf)
 
 ## Schnellstart
 

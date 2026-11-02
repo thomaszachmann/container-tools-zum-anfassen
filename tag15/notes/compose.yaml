@@ -1,0 +1,57 @@
+# compose.yaml – Stand Ende Tag 15: notes mit Docker Compose, Images aus dem Quellcode
+name: ct15
+
+services:
+  db:
+    image: docker.io/library/postgres:18.6-alpine
+    security_opt:
+      - apparmor=unconfined    # Ubuntu 26.04: docker-default verbietet gosu Signale
+    environment:
+      POSTGRES_USER: notes
+      POSTGRES_DB: notes
+      POSTGRES_PASSWORD: lab-db-pw-123
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1", "-U", "notes", "-d", "notes"]
+      interval: 2s
+      retries: 30
+
+  migrate:
+    image: ct-lab/notes-api:0.1.0
+    build:
+      context: notes-api
+      args:
+        VERSION: 0.1.0
+    command: ["migrate"]
+    environment:
+      NOTES_DB_URL: postgres://notes:lab-db-pw-123@db:5432/notes
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    image: ct-lab/notes-api:0.1.0
+    environment:
+      NOTES_API_KEY: lab-api-key-123
+      NOTES_DB_URL: postgres://notes:lab-db-pw-123@db:5432/notes
+    ports:
+      - "127.0.0.1:8096:8080"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  web:
+    image: ct-lab/notes-web:0.1.0
+    build: notes-web
+    environment:
+      NOTES_API_URL: http://api:8080
+      NOTES_API_KEY: lab-api-key-123
+    ports:
+      - "127.0.0.1:3006:3000"
+    depends_on:
+      api:
+        condition: service_healthy      # HEALTHCHECK aus dem Dockerfile
+
+volumes:
+  pgdata:

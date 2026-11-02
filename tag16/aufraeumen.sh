@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# aufraeumen.sh – Stand Ende Tag 15: entfernt alles, was die Runden angelegt haben
+# aufraeumen.sh – Stand Ende Tag 16: entfernt alles, was die Runden angelegt haben
 # Container r15-*, Units r15-*, Images localhost/r15-* und notes-api:r02, alle Tags in
 # lab/notes-api und lab/release-api (samt sha256-…). Die Rundenordner bleiben liegen.
 set -uo pipefail
